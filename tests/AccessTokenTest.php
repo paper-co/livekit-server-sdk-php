@@ -4,6 +4,7 @@ namespace Agence104\LiveKit\Tests;
 
 use Agence104\LiveKit\AccessToken;
 use Agence104\LiveKit\AccessTokenOptions;
+use Agence104\LiveKit\RoomConfiguration;
 use Agence104\LiveKit\SIPGrant;
 use Agence104\LiveKit\VideoGrant;
 use Firebase\JWT\JWT;
@@ -188,5 +189,25 @@ class AccessTokenTest extends TestCase {
     $this->assertEquals('engineering', $decoded->attributes->department);
     $this->assertEquals('admin', $decoded->attributes->role);
   }
+
+  /**
+   * Test that room configuration is properly set and retrieved.
+   */
+  public function testRoomConfig(): void {
+    $tokenOptions = (new AccessTokenOptions())
+      ->setIdentity('me')
+      ->setRoomConfig(
+          (new RoomConfiguration())
+          ->setName('myroom')
+          ->setMetadata('{"key":"value"}')
+      );
+
+    $token = new AccessToken($this->testApiKey, $this->testSecret, $tokenOptions);
+    $jwt = $token->toJwt();
+    $decoded = JWT::decode($jwt, new Key($this->testSecret, 'HS256'));
+
+    $this->assertEquals('myroom', $decoded->roomConfig->name);
+      $this->assertEquals('{"key":"value"}', $decoded->roomConfig->metadata);
+    }
 
 }
