@@ -1,9 +1,15 @@
 {
-    "name": "agence104/livekit-server-sdk",
+    "name": "paper-co/livekit-server-sdk",
     "description": "Server-side SDK for LiveKit.",
     "type": "library",
     "license": "MIT",
     "version": "1.3.0",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://paper-build-php-package-repository.storage.googleapis.com/"
+        }
+    ],
     "authors": [
         {
             "name": "Agence 10-4",
