@@ -28,6 +28,11 @@ class RoomConfiguration {
   protected ?int $maxParticipants = NULL;
 
   /**
+   * Custom room metadata.
+   */
+  protected ?string $metadata = NULL;
+
+  /**
    * Playout delay of subscriber.
    */
   protected ?int $minPlayoutDelay = NULL;
@@ -153,6 +158,29 @@ class RoomConfiguration {
    */
   public function setMaxParticipants(?int $maxParticipants): self {
     $this->maxParticipants = $maxParticipants;
+    return $this;
+  }
+
+  /**
+   * Get the room metadata.
+   *
+   * @return string|null
+   *   The room metadata.
+   */
+  public function getMetadata(): ?string {
+    return $this->metadata;
+  }
+
+  /**
+   * Set the room name.
+   *
+   * @param string|null $metadata
+   *   The room name.
+   *
+   * @return $this
+   */
+  public function setMetadata(?string $metadata): self {
+    $this->metadata = $metadata;
     return $this;
   }
 
